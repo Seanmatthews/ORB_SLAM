@@ -47,13 +47,11 @@ We use the Boost library to launch the different threads of our SLAM system.
 
 ##2.2 ROS
 We use ROS to receive images from the camera or from a recorded sequence (rosbag), and for visualization (rviz, image_view). 
-**We have tested ORB-SLAM in Ubuntu 12.04 with ROS Fuerte, Groovy and Hydro; and in Ubuntu 14.04 with ROS Indigo**. 
-If you do not have already installed ROS in your computer, we recommend you to install the Full-Desktop version of ROS Fuerte (http://wiki.ros.org/fuerte/Installation/Ubuntu).
-
-**If you use ROS Indigo, remove the depency of opencv2 in the manifest.xml.**
+**This version tested in Ubuntu 16.04 with ROS Kinetic**. 
+If you do not have already installed ROS in your computer, we recommend you to install the Full-Desktop version of ROS Kinetic.
 
 ##2.3 OpenCV
-We use OpenCV to manipulate images and features. If you use a ROS version older than ROS Indigo, OpenCV is already included in the ROS distribution. In newer version of ROS, OpenCV is not included and you will need to install it. **We tested OpenCV 2.4**. Dowload and install instructions can be found at: http://opencv.org/
+We use OpenCV to manipulate images and features. In newer versions of ROS, OpenCV is not included and you will need to install it. **We tested OpenCV 3.1.0-dev**. Dowload and install instructions can be found at: http://opencv.org/
 
 ##2.4 g2o (included in Thirdparty)
 We use a modified version of g2o (see original at https://github.com/RainerKuemmerle/g2o) to perform optimizations.
