@@ -1,18 +1,8 @@
-cmake_minimum_required(VERSION 2.4.6)
-include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
-
-rosbuild_init()
-
-IF(NOT ROS_BUILD_TYPE)
-  SET(ROS_BUILD_TYPE Release)
-ENDIF()
-
-MESSAGE("Build type: " ${ROS_BUILD_TYPE})
+cmake_minimum_required(VERSION 2.8.3)
+project(ORB_SLAM)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 -march=native ")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -O3 -march=native")
-
-set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
@@ -33,9 +23,10 @@ catkin_package(
 )
 
 include_directories(
-${PROJECT_SOURCE_DIR}
-${EIGEN3_INCLUDE_DIR}
-${catkin_INCLUDE_DIRS}
+  include
+  ${PROJECT_SOURCE_DIR}
+  ${EIGEN3_INCLUDE_DIR}
+  ${catkin_INCLUDE_DIRS}
 )
 
 add_executable(${PROJECT_NAME}
@@ -62,8 +53,8 @@ src/Initializer.cc
 #rosbuild_link_boost(${PROJECT_NAME} thread)
 
 target_link_libraries(${PROJECT_NAME}
-${OpenCV_LIBS}
-${EIGEN3_LIBS}
+#${OpenCV_LIBS}
+#${EIGEN3_LIBS}
 ${catkin_LIBRARIES}
 ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
