@@ -16,15 +16,29 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  image_transport
+  sensor_msgs
+  cv_bridge
+  tf
+)
+
 find_package(OpenCV REQUIRED)
 find_package(Eigen3 REQUIRED)
+
+catkin_package(
+  INCLUDE_DIRS include
+  CATKIN_DEPENDS roscpp image_transport sensor_msgs cv_bridge tf
+)
 
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${EIGEN3_INCLUDE_DIR}
+${catkin_INCLUDE_DIRS}
 )
 
-rosbuild_add_executable(${PROJECT_NAME}
+add_executable(${PROJECT_NAME}
 src/main.cc
 src/Tracking.cc
 src/LocalMapping.cc
@@ -44,12 +58,13 @@ src/KeyFrameDatabase.cc
 src/Sim3Solver.cc
 src/Initializer.cc
 )
-rosbuild_add_boost_directories()
-rosbuild_link_boost(${PROJECT_NAME} thread)
+#rosbuild_add_boost_directories()
+#rosbuild_link_boost(${PROJECT_NAME} thread)
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
+${catkin_LIBRARIES}
 ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
 )
